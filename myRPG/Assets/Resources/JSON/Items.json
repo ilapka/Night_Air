@@ -1,0 +1,41 @@
+[
+  {
+    "objectSlug": "Katana",
+    "itemName": "Катана",
+    "description": "Острейшее лезвие.",
+    "itemType": "Weapon",
+    "actionName": "Надеть",
+    "itemModifier": 0,
+    "count":  5,
+    "Stats": [
+      {
+        "StatType": "Power",
+        "BaseValue": 25,
+        "StatName": "Сила"
+      }
+    ]
+  },
+    {
+        "objectSlug": "Pistol",
+        "itemName": "Пистолет",
+        "description": "Священное оружие",
+        "itemType": "Weapon",
+        "actionName": "Надеть",
+        "itemModifier": 0,
+        "Stats": [
+            {
+                "StatType": "Power",
+                "BaseValue": 800,
+                "StatName": "Power"
+            }
+        ]
+    },
+    {
+        "objectSlug": "potion_health",
+        "itemName": "Зелье здоровья",
+        "description": "Восстанавливает 25 здоровья",
+        "itemType": "Consumable",
+        "actionName": "Выпить",
+        "itemModifier": 0
+    }
+]
