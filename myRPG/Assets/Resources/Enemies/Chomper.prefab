@@ -256,6 +256,7 @@ MonoBehaviour:
   Experience: 50
   exploasionParticleSystem: {fileID: 1767721306}
   explodRange: 2.5
+  exploadDamage: 10
 --- !u!95 &307864533
 Animator:
   serializedVersion: 3

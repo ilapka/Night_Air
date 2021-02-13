@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         }
         else
         {
-            //ReturnToSpawn else just stop 
+            //ReturnToSpawn or stop 
             PlayerNotFound();
         }
     }
@@ -100,25 +100,27 @@ public class Enemy : MonoBehaviour, ITakeDamage
 
         if (!IsInvoking("PerformAttack"))
         {
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (!agent.pathPending)
             {
-                OnAttack();
-                Invoke("PerformAttack", 0.4f);
-            }
-            else
-            {
-                agent.updatePosition = true;
-                agent.updateRotation = true;
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    Debug.Log(agent.remainingDistance);
+                    OnAttack();
+                    Invoke("PerformAttack", 0.4f);
+                }
             }
         }
     }
 
     void PerformAttack()
     {
-        enemyAnim.SetTrigger("Attack1");
-        agent.updatePosition = false;
-        agent.updateRotation = false;
-        EnsureLookDirection();
+        if (!isDead)
+        {
+            enemyAnim.SetTrigger("Attack1");
+            isAttacking = true;
+            agent.SetDestination(transform.position);
+            EnsureLookDirection();
+        }
     }
 
     void EnsureLookDirection()
@@ -132,7 +134,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
     #region Animator events
     public virtual void OnAttack()
     {
-        isAttacking = true;
+        //some action onAttack 
     }
 
     public virtual void OffAttack()
@@ -183,7 +185,7 @@ public class Enemy : MonoBehaviour, ITakeDamage
         if (item != null)
         {
             PickupItem pickupItem = Resources.Load<PickupItem>($"DropItems/{item.ObjectSlug}");
-            PickupItem instance = Instantiate(pickupItem, transform.position, Quaternion.identity);
+            PickupItem instance = Instantiate(pickupItem, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
             instance.ItemDrop = item;
         }
     }

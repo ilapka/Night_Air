@@ -32,8 +32,7 @@ public class BaseStat
         StatName = statName;
         StatDescription = statDescription;
     }
-
-
+    
     //constructor for json
     [Newtonsoft.Json.JsonConstructor]
     public BaseStat(BaseStatType statType, int baseValue, string statName)

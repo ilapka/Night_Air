@@ -11,14 +11,13 @@ public class PortalController : MonoBehaviour
     [SerializeField] GameObject portalPanel;
     [SerializeField] Player player;
     private Portal[] portal;
- 
-
-    Color closeButtonColor;
+    private NavMeshAgent playerNavMeshAgent;
 
     void Start()
     {
         player = FindObjectOfType<Player>();
         portalPanel.SetActive(false);
+        playerNavMeshAgent = player.GetComponent<NavMeshAgent>();
     }
 
     public void ActivatePortal(Portal[] portals)
@@ -40,7 +39,7 @@ public class PortalController : MonoBehaviour
 
     void OnPortalButtonClick(int portalIndex, Portal portal)
     {
-        player.GetComponent<NavMeshAgent>().enabled = false;
+        playerNavMeshAgent.enabled = false;
         player.transform.position = portal.TeleportLocation;
         Debug.Log(portal.name + portal.TeleportLocation);
         foreach (Button button in GetComponentsInChildren<Button>())
@@ -49,7 +48,7 @@ public class PortalController : MonoBehaviour
         }
         backPanel.SetActive(false);
         portalPanel.SetActive(false);
-        player.GetComponent<NavMeshAgent>().enabled = true;
+        playerNavMeshAgent.enabled = true;
     }
 
     void OnCloseButtonClick()
