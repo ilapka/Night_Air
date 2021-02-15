@@ -37,7 +37,7 @@ public class QuestGiver : NPC
 
     private void CheckQuest()
     {
-        if (QuestController.Instance.currentQuest.Completed)
+        if (QuestController.Instance.CheckCurrentQuestComplete())
             CompleteQuest();
         else
             DialogueSystem.Instance.AddNewDialogue(inProgressDialogue, nameNPC);
