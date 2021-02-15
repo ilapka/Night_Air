@@ -7,7 +7,7 @@ public class QuestController : MonoBehaviour
     public static QuestController Instance;
     private Quest currentQuest;
     private Queue<Quest> questsRepository;
-    [SerializeField] GameObject questsContener;
+    [SerializeField] GameObject questsСontainer;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class QuestController : MonoBehaviour
         questsRepository = new Queue<Quest>();
 
         #region Take all quests in order from GameObject "Quests"
-        foreach (Quest quest in questsContener.GetComponents<Quest>())
+        foreach (Quest quest in questsСontainer.GetComponents<Quest>())
         {
             Debug.Log(quest.QuestName);
             questsRepository.Enqueue(quest);
