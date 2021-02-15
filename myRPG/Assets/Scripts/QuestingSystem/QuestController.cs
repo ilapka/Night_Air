@@ -5,11 +5,9 @@ using UnityEngine;
 public class QuestController : MonoBehaviour
 {
     public static QuestController Instance;
-    public Quest currentQuest;
-
+    public Quest CurrentQuest;
     private Queue<Quest> questsRepository = new Queue<Quest>();
     private float delayNextQuestSet;
-
     [SerializeField] GameObject questsContener;
 
     void Start()
