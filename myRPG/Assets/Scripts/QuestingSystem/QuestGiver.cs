@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class QuestGiver : NPC
 {
+    public bool AssignedQuest { get; private set; }
+    public bool Helped { get; private set; }
     [SerializeField] string[] inProgressDialogue;
     [SerializeField] string[] completeDialogue;
     [SerializeField] string[] afterCompleteDialogue;
-
-    public bool AssignedQuest { get; private set; }
-    public bool Helped { get; private set; }
+    [SerializeField] float delayBeforeQuestSet;
+    [SerializeField] float delayBeforeNextQuestSet;
 
     public override void Interact()
     {
@@ -31,7 +32,7 @@ public class QuestGiver : NPC
     private void AssignQuest()
     {
         AssignedQuest = true;
-        QuestController.Instance.NextQuest();
+        QuestController.Instance.NextQuest(delayBeforeQuestSet);
         DialogueSystem.Instance.AddNewDialogue(base.firstDialogue, nameNPC, anim);
     }
 
@@ -48,6 +49,6 @@ public class QuestGiver : NPC
         Helped = true;
         AssignedQuest = false;
         DialogueSystem.Instance.AddNewDialogue(completeDialogue, nameNPC, anim);
-        QuestController.Instance.NextQuest();
+        QuestController.Instance.NextQuest(delayBeforeNextQuestSet);
     }
 }

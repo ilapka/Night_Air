@@ -7,7 +7,7 @@ public class Inspectable : Interactable
     [SerializeField] string speakerName;
     [SerializeField] string[] questDialogue;
     [SerializeField] string[] afterQuestDialogue;
-    
+    [SerializeField] float delayBeforeNextQuestSet;
     private bool inspected = false;
 
     public override void Interact()
@@ -28,7 +28,8 @@ public class Inspectable : Interactable
         base.Interact();
         inspected = true;
         UIEventHandler.ObjectInspect(this.gameObject);
-        QuestController.Instance.NextQuest();
+        Debug.Log(delayBeforeNextQuestSet);
+        QuestController.Instance.NextQuest(delayBeforeNextQuestSet);
         DialogueSystem.Instance.AddNewDialogue(questDialogue, speakerName);
     }
 }

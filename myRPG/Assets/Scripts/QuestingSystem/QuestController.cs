@@ -5,13 +5,8 @@ using UnityEngine;
 public class QuestController : MonoBehaviour
 {
     public static QuestController Instance;
-<<<<<<< HEAD
     private Quest currentQuest;
-=======
-    public Quest currentQuest;
->>>>>>> 091093464f7386e88cd320859e5655d38aa244d2
-    private Queue<Quest> questsRepository = new Queue<Quest>();
-    private float delayNextQuestSet;
+    private Queue<Quest> questsRepository;
     [SerializeField] GameObject questsContener;
 
     void Start()
@@ -23,6 +18,9 @@ public class QuestController : MonoBehaviour
             Instance = this;
         #endregion
 
+        currentQuest = new Quest();
+        questsRepository = new Queue<Quest>();
+
         #region Take all quests in order from GameObject "Quests"
         foreach (Quest quest in questsContener.GetComponents<Quest>())
         {
@@ -30,21 +28,13 @@ public class QuestController : MonoBehaviour
             questsRepository.Enqueue(quest);
         }
         #endregion
-
-        currentQuest = new Quest();
-        NextQuest(0.5F); //first Quest
+ 
+        NextQuest(0.5f); //first Quest
     }
 
-    public void NextQuest()
+    public void NextQuest(float delayBeforeNextQuestSet)
     {
-        delayNextQuestSet = 4f;
-        StartCoroutine(NextQuestCoroutine());  
-    }
-
-    public void NextQuest(float delayNextQuestSet)
-    {
-        this.delayNextQuestSet = delayNextQuestSet;
-        StartCoroutine(NextQuestCoroutine());
+        StartCoroutine(NextQuestCoroutine(delayBeforeNextQuestSet));
     }
 
     public bool CheckCurrentQuestComplete()
@@ -52,10 +42,10 @@ public class QuestController : MonoBehaviour
         return currentQuest.Completed;
     }
 
-    private IEnumerator NextQuestCoroutine()
+    private IEnumerator NextQuestCoroutine(float delayBeforeNextQuestSet)
     {
         PreviousQuestComplete();
-        yield return new WaitForSeconds(delayNextQuestSet);
+        yield return new WaitForSeconds(delayBeforeNextQuestSet);
         NextQuestAssign();
     }
 
