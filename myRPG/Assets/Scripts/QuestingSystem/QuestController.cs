@@ -6,7 +6,6 @@ public class QuestController : MonoBehaviour
 {
     public static QuestController Instance;
     private Quest currentQuest;
-    public Quest currentQuest;
     private Queue<Quest> questsRepository = new Queue<Quest>();
     private float delayNextQuestSet;
     [SerializeField] GameObject questsContener;
