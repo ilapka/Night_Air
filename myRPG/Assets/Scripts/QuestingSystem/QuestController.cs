@@ -32,14 +32,14 @@ public class QuestController : MonoBehaviour
         NextQuest(0.5f); //first Quest
     }
 
-    public void NextQuest(float delayBeforeNextQuestSet)
-    {
-        StartCoroutine(NextQuestCoroutine(delayBeforeNextQuestSet));
-    }
-
     public bool CheckCurrentQuestComplete()
     {
         return currentQuest.Completed;
+    }
+
+    public void NextQuest(float delayBeforeNextQuestSet)
+    {
+        StartCoroutine(NextQuestCoroutine(delayBeforeNextQuestSet));
     }
 
     private IEnumerator NextQuestCoroutine(float delayBeforeNextQuestSet)
